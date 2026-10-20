@@ -1,9 +1,13 @@
 import json, socket
 from http_parser import read_http_request
 from http_request import HTTPError
+from routes import app
+from users import create_user
+
 
 HOST = "127.0.0.1"
 PORT = 8080
+
 
 server_socket = socket.socket(
 	socket.AF_INET,
@@ -19,6 +23,7 @@ server_socket.setsockopt(
 server_socket.bind((HOST, PORT))
 server_socket.listen(5)
 print(f"Server listening on {HOST}:{PORT}")
+
 
 # Wait indefinitely until a client connects
 while True:
@@ -45,12 +50,14 @@ while True:
         ):
             print("JSON:", request.json())
 
-        status = 200
-        payload = {
-            "method": request.method,
-            "path": request.path,
-            "query_params": request.query_params
-        }
+        # status = 200
+        # payload = {
+        #     "method": request.method,
+        #     "path": request.path,
+        #     "query_params": request.query_params
+        # }
+
+        status, payload = app.dispatch(request)
 
     except HTTPError as exc:
         status = exc.status_code
@@ -70,13 +77,16 @@ while True:
     reason_phrases = {
         200: "OK",
         400: "Bad Request",
+        401: "Unauthorized",
+        403: "Forbidden",
+        404: "Not Found",
         408: "Request Timeout",
+        409: "Conflict",
         413: "Content Too Large",
         431: "Request Header Fields Too Large",
         500: "Internal Server Error",
-        501: "Not Implemented"
+        501: "Not Implemented",
     }
-
     reason = reason_phrases.get(status, "Error")
 
     response = (
