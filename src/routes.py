@@ -1,8 +1,8 @@
-from mini_api import MiniAPI
-from auth import authorize
-from users import authenticate_user, create_user, USERS
-from tokens import create_token, TOKEN_LIFETIME
-from http_request import HTTPError
+from .mini_api import MiniAPI
+from .auth import authorize
+from .users import authenticate_user, create_user, USERS
+from .tokens import create_token, TOKEN_LIFETIME
+from .http_request import HTTPError
 
 
 app = MiniAPI()

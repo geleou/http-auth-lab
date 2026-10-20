@@ -1,4 +1,4 @@
-from passwords import hash_password, verify_password
+from .passwords import hash_password, verify_password
 
 
 # For now let user authentication be static

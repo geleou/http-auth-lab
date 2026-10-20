@@ -1,4 +1,4 @@
-from http_request import Request, HTTPError
+from .http_request import Request, HTTPError
 
 def parse_request(raw_data: bytes) -> Request:
 	# Separate headers from body on the first occurence of the separator

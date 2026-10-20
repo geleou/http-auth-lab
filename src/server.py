@@ -1,8 +1,8 @@
 import json, socket
-from http_parser import read_http_request
-from http_request import HTTPError
-from routes import app
-from users import create_user
+from .http_parser import read_http_request
+from .http_request import HTTPError
+from .routes import app
+from .users import create_user
 
 
 HOST = "127.0.0.1"

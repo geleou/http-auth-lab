@@ -1,6 +1,6 @@
-from http_request import HTTPError
-from tokens import validate_token
-from users import USERS
+from .http_request import HTTPError
+from .tokens import validate_token
+from .users import USERS
 
 from functools import wraps
 
